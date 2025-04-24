@@ -13,22 +13,22 @@ export default function AuthCardLayout({
     description?: string;
 }>) {
     return (
-        <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
+        <div className="bg-[#1a1a1a] flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
             <div className="flex w-full max-w-md flex-col gap-6">
-                <Link href={route('home')} className="flex items-center gap-2 self-center font-medium">
-                    <div className="flex h-9 w-9 items-center justify-center">
-                        <AppLogoIcon className="size-9 fill-current text-black dark:text-white" />
+                <Link href={route('netix')} className="flex items-center gap-2 self-center font-medium">
+                    <div className="flex h-12 w-12 items-center justify-center">
+                        <h1 className="text-2xl font-tech-heading font-bold text-netix-primary">NETiX</h1>
                     </div>
                 </Link>
 
                 <div className="flex flex-col gap-6">
-                    <Card className="rounded-xl">
-                        <CardHeader className="px-10 pt-8 pb-0 text-center">
-                            <CardTitle className="text-xl">{title}</CardTitle>
-                            <CardDescription>{description}</CardDescription>
-                        </CardHeader>
-                        <CardContent className="px-10 py-8">{children}</CardContent>
-                    </Card>
+                    <div className="tech-card rounded-xl border border-netix-primary/20 bg-[#252525] p-6 shadow-md">
+                        <div className="px-6 pt-6 pb-0 text-center">
+                            <h2 className="text-xl font-tech-heading font-bold text-netix-primary mb-2">{title}</h2>
+                            <p className="text-netix-light-muted font-tech">{description}</p>
+                        </div>
+                        <div className="px-6 py-8">{children}</div>
+                    </div>
                 </div>
             </div>
         </div>

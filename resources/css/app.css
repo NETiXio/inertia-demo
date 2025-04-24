@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import './netix-animations.css';
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech&family=Share+Tech+Mono&display=swap');
 
 @plugin 'tailwindcss-animate';
 
@@ -9,7 +11,7 @@
 
 @theme {
     --font-sans:
-        'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        'Share Tech', 'Share Tech Mono', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -78,6 +80,15 @@
 }
 
 :root {
+    /* NETiX color scheme */
+    --netix-primary: #FFFFFF; /* White */
+    --netix-primary-rgb: 255, 255, 255;
+    --netix-dark: #1a1a1a;
+    --netix-dark-accent: #252525;
+    --netix-light: #f5f5f5;
+    --netix-light-muted: #b0b0b0;
+    
+    /* Default theme colors */
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
@@ -152,8 +163,431 @@
     * {
         @apply border-border;
     }
+    
+    /* NETiX utility classes */
+    .text-netix-primary {
+        color: var(--netix-primary);
+    }
+    
+    .bg-netix-primary {
+        background-color: var(--netix-primary);
+    }
+    
+    .border-netix-primary {
+        border-color: var(--netix-primary);
+    }
+    
+    .text-netix-dark {
+        color: var(--netix-dark);
+    }
+    
+    .bg-netix-dark {
+        background-color: var(--netix-dark);
+    }
+    
+    .text-netix-dark-accent {
+        color: var(--netix-dark-accent);
+    }
+    
+    .bg-netix-dark-accent {
+        background-color: var(--netix-dark-accent);
+    }
+    
+    .text-netix-light {
+        color: var(--netix-light);
+    }
+    
+    .bg-netix-light {
+        background-color: var(--netix-light);
+    }
+    
+    .text-netix-light-muted {
+        color: var(--netix-light-muted);
+    }
+    
+    .bg-netix-light-muted {
+        background-color: var(--netix-light-muted);
+    }
 
     body {
         @apply bg-background text-foreground;
+        font-family: 'Share Tech', sans-serif;
+        position: relative;
+    }
+    
+    /* Bloom effect for the entire page */
+    body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+        background: transparent;
+        mix-blend-mode: screen;
+        filter: blur(4px);
+        opacity: 0.15;
+        box-shadow:
+            inset 0 0 100px rgba(0, 240, 255, 0.2),
+            inset 0 0 50px rgba(255, 255, 255, 0.1);
+    }
+    
+    /* Circuit board texture for sections - more subtle */
+    .circuit-texture {
+        position: relative;
+        background-color: #252525;
+        background-image:
+            radial-gradient(circle at 25px 25px, rgba(0, 240, 255, 0.05) 2px, transparent 0),
+            radial-gradient(circle at 75px 75px, rgba(0, 240, 255, 0.05) 2px, transparent 0),
+            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+        background-position: 0 0, 0 0, 0 0, 0 0;
+    }
+    
+    /* Dot matrix texture - more subtle */
+    .dot-matrix {
+        position: relative;
+        background-color: #1a1a1a;
+        background-image:
+            radial-gradient(circle at 10px 10px, rgba(255, 255, 255, 0.01) 1px, transparent 0);
+        background-size: 20px 20px;
+    }
+    
+    /* Digital noise texture - more subtle */
+    .digital-noise-bg {
+        position: relative;
+        background-color: #1a1a1a;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+    
+    /* Font classes */
+    .font-tech {
+        font-family: 'Share Tech', sans-serif;
+    }
+    
+    .font-tech-mono {
+        font-family: 'Share Tech Mono', monospace;
+    }
+    
+    .font-tech-heading {
+        font-family: 'Share Tech', sans-serif;
+        letter-spacing: 0.5px;
+    }
+    
+    /* Enhanced section styling */
+    .section-divider {
+        position: relative;
+        height: 100px;
+        overflow: hidden;
+    }
+    
+    .section-divider::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, transparent, #1a1a1a);
+        z-index: 1;
+    }
+    
+    .section-divider::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(0, 240, 255, 0.1) 20%,
+            rgba(0, 240, 255, 0.2) 50%,
+            rgba(0, 240, 255, 0.1) 80%,
+            transparent 100%);
+    }
+    
+    /* Enhanced section headers */
+    .section-header {
+        position: relative;
+        display: inline-block;
+        padding-bottom: 0.5rem;
+    }
+    
+    .section-header::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(0, 240, 255, 0.3) 20%,
+            rgba(0, 240, 255, 0.8) 50%,
+            rgba(0, 240, 255, 0.3) 80%,
+            transparent 100%);
+    }
+    
+    /* Enhanced card styling */
+    .enhanced-card {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        border: 1px solid rgba(0, 240, 255, 0.1);
+        background: linear-gradient(135deg,
+            rgba(37, 37, 37, 0.8) 0%,
+            rgba(26, 26, 26, 0.9) 100%);
+    }
+    
+    .enhanced-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 50% 0%,
+            rgba(0, 240, 255, 0.1) 0%,
+            transparent 70%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .enhanced-card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+            0 10px 25px -5px rgba(0, 0, 0, 0.3),
+            0 0 15px rgba(0, 240, 255, 0.2);
+        border-color: rgba(0, 240, 255, 0.3);
+    }
+    
+    .enhanced-card:hover::before {
+        opacity: 1;
+    }
+    
+    /* Accent border */
+    .accent-border {
+        position: relative;
+    }
+    
+    .accent-border::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 100%;
+        background: linear-gradient(to bottom,
+            rgba(0, 240, 255, 0.1) 0%,
+            rgba(0, 240, 255, 0.6) 50%,
+            rgba(0, 240, 255, 0.1) 100%);
+    }
+    
+    /* Bloom effect for bright elements */
+    .text-netix-primary,
+    h1, h2, h3, h4, h5, h6,
+    .btn-primary,
+    .section-header::after,
+    .hero-glitch {
+        position: relative;
+    }
+    
+    .text-netix-primary::after,
+    h1::after, h2::after, h3::after, h4::after, h5::after, h6::after,
+    .btn-primary::after,
+    .section-header::after::after,
+    .hero-glitch::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        filter: blur(4px);
+        opacity: 0.3;
+        background: inherit;
+        z-index: -1;
+        pointer-events: none;
+    }
+    
+    /* Dark gray gradient backgrounds - more visible */
+    .dark-gradient-bg {
+        background-image: linear-gradient(135deg, #1a1a1a 0%, #252525 100%) !important;
+        background-color: #1a1a1a !important;
+    }
+    
+    .dark-gradient-radial {
+        background-image: radial-gradient(circle at center, #252525 0%, #1a1a1a 100%) !important;
+        background-color: #1a1a1a !important;
+    }
+    
+    .dark-gradient-top {
+        background-image: linear-gradient(to bottom, #252525 0%, #1a1a1a 100%) !important;
+        background-color: #1a1a1a !important;
+    }
+    
+    .dark-gradient-bottom {
+        background-image: linear-gradient(to top, #252525 0%, #1a1a1a 100%) !important;
+        background-color: #1a1a1a !important;
+    }
+    
+    /* Bloom effect class that can be applied to any element */
+    .bloom-effect {
+        position: relative;
+    }
+    
+    .bloom-effect::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        background: rgba(0, 240, 255, 0.1);
+        filter: blur(8px);
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .bloom-effect:hover::before {
+        opacity: 1;
+    }
+    
+    /* Enhanced background patterns and effects */
+    
+    /* Subtle grid background pattern */
+    .grid-background {
+        background-color: #1a1a1a;
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+    
+    /* Larger grid lines at intervals with very subtle gradient */
+    .grid-background-enhanced {
+        background-color: #1a1a1a;
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+            linear-gradient(rgba(255, 255, 255, 0.02) 2px, transparent 2px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 2px, transparent 2px);
+        background-size: 20px 20px, 20px 20px, 100px 100px, 100px 100px;
+        background-position: 0 0, 0 0, 0 0, 0 0;
+        position: relative;
+    }
+    
+    /* Very subtle gradient overlay */
+    .grid-background-enhanced::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.01) 0%, rgba(0, 0, 0, 0) 70%);
+        pointer-events: none;
+    }
+    
+    /* Modern card styling */
+    .tech-card {
+        transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .tech-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+        transition: all 0.6s ease;
+    }
+    
+    .tech-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .tech-card:hover::before {
+        left: 100%;
+    }
+    
+    /* Enhanced text effects */
+    .text-glow {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    
+    .text-gradient {
+        background: linear-gradient(90deg, #fff, #00f0ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+    }
+    
+    /* Animated underline effect for links */
+    .animated-underline {
+        position: relative;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .animated-underline::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: currentColor;
+        transform-origin: bottom right;
+        transition: transform 0.3s ease-out;
+    }
+    
+    .animated-underline:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+    
+    /* Subtle animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .animate-fade-in-up {
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    /* Staggered animation delays */
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+    
+    /* Glass morphism effect */
+    .glass-effect {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 }

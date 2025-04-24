@@ -28,19 +28,29 @@
             html.dark {
                 background-color: oklch(0.145 0 0);
             }
+            
+            /* Force Share Tech font on all elements */
+            html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, button, input, textarea, select {
+                font-family: 'Share Tech', sans-serif !important;
+            }
         </style>
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+        
+        <!-- Share Tech Font from Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Share+Tech&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
         @routes
         @viteReactRefresh
         @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
         @inertiaHead
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans font-tech antialiased" style="font-family: 'Share Tech', sans-serif !important;">
         @inertia
     </body>
 </html>
